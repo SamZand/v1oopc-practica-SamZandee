@@ -45,3 +45,18 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# eigen meuk
+.codelite
+template-due
+template-native
+template-week-1
+test
+makefile
+makefile.due
+makefile.link
+makefile.native
+makefile.shared
+README.md
+update_codelite_workspace.bat
+Week-3
