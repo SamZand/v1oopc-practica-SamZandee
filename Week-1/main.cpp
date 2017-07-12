@@ -2,15 +2,14 @@
 #include "window.hpp"
 #include "Object.hpp"
 
-int main(int argc, char **argv){
-   window w( 128, 64, 10 );
-   
-   Object all( w, 1);
-   all.print();
-   
-   Object all1( w, 2);
-   all1.print();
+int main(int argc, char** argv)
+{
+    window w(128, 64, 10);
 
+    Object p1(w, 2, 4, 1);
+    p1.print();
+//    Object p2(w, 2, 20, 2);
+//   p2.print();
 
-   return 0;
+    return 0;
 }
