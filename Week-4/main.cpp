@@ -35,7 +35,8 @@ int main(void)
     auto led3 = hwlib::target::pin_out(hwlib::target::pins::d2);
 
     auto leds = hwlib::port_out_from_pins(led0, led1, led2, led3);
-    ::opdrachtInput(sw0, sw1, leds);
+    
+    opdrachtInput(sw0, sw1, leds);
 }
 //        for(;;) {
 //            led0.set(1);

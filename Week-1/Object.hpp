@@ -35,12 +35,12 @@ public:
              * @param Y position
              * @param Scale
              */
-    Object(window& w, int x, int y, int s)
+    Object(window& w, int x, int y, float s)
         : x(x)
         , y(y)
         , w(w)
         , circ1(w, x + 15 * s, y + 5 * s, 1 * s)
-        , circ2(w, x + 13 * s, y + 2 * s, 1 * s)
+        , circ2(w, x + 13 * s, y + 0 * s, 1 * s)
         , lin1(w, x + 9 * s, y + 20 * s, x + 26 * s, y + 5 * s)
         , lin2(w, x + 41 * s, y + 20 * s, x + 24 * s, y + 5 * s)
         , rec1(w, x + 10 * s, y + 20 * s, x + 40 * s, y + 50 * s)

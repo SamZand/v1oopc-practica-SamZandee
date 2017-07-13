@@ -30,7 +30,7 @@
       <Project Name="Week-1" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
-  <Project Name="Week-2-ADT" Path="Week-2-ADT/_codelite.project" Active="No"/>
+  <Project Name="Week-2-ADT" Path="Week-2-ADT/_codelite.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Release" Selected="yes">
       <Project Name="Week-2-ADT" ConfigName="Release"/>
@@ -48,7 +48,7 @@
       <Project Name="Week-3" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
-  <Project Name="Week-4" Path="Week-4/_codelite.project" Active="Yes"/>
+  <Project Name="Week-4" Path="Week-4/_codelite.project" Active="No"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Release" Selected="yes">
       <Project Name="Week-4" ConfigName="Release"/>

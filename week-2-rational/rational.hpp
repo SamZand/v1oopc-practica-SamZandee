@@ -1,5 +1,9 @@
 #ifndef RATIONAL_HPP
 #define RATIONAL_HPP
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <iomanip>
 
 /// @file
 
@@ -13,95 +17,105 @@
 /// Rational values are always simplied (reduced): the counter
 /// and denominator have no common factors.
 class rational {
-	private:
-	int counter;
-	int denominator;
+private:
+   int counter;
+   int denominator;
+   
+   void reduce(){
+      int a = counter;
+      int b = denominator;
 
-	void reduce() {
-		int a = counter;
-		int b = denominator;
+      while( b ){
+         int temp = b;
+         b = a % b;
+         a = temp;
+      }
 
-		while (b) {
-			int temp = b;
-			b = a % b;
-			a = temp;
-		}
+      if( a ){
+         counter /= a;
+         denominator /= a;
+      }
+   }
+   
+public:
 
-		if (a) {
-			counter /= a;
-			denominator /= a;
-		}
-	}
+   /// \brief
+   /// constructor from explicit values
+   /// \details
+   /// This constructor initializes a rational from its counter and denominator.
+   /// The default value for the denominator is 1, so a rational be initialized
+   /// with just a whole value.
+   rational( int counter, int denominator = 1 ):
+     counter( counter ), denominator( denominator )
+   {reduce();}
+   
+   /// \brief   
+   /// compare two rational values
+   /// \details
+   /// This operator tests for equality. It returns true
+   /// if and only if the counter and denminator of both
+   /// operands are equal.
+   bool operator==( const rational & rhs ) const {
+      return ( counter == rhs.counter ) && ( denominator == rhs.denominator );
+   }
 
-	public:
-	/// \brief
-	/// constructor from explicit values
-	/// \details
-	/// This constructor initializes a rational from its counter and denominator.
-	/// The default value for the denominator is 1, so a rational be initialized
-	/// with just a whole value.
-	rational(int counter, int denominator = 1)
-	  : counter(counter), denominator(denominator) {
-		reduce();
-	}
-
-	/// \brief
-	/// compare two rational values
-	/// \details
-	/// This operator tests for equality. It returns true
-	/// if and only if the counter and denminator of both
-	/// operands are equal.
-	bool operator==(const rational& rhs) const {
-		return (counter == rhs.counter) && (denominator == rhs.denominator);
-	}
-
-	/// \brief
-	/// output operator for a rational value
-	/// \details
-	/// This operator<< prints a constructor in the format
-	/// [counter/denominator] where both values are printed as
-	/// decimal values.
-	friend std::ostream& operator<<(std::ostream& lhs, const rational& rhs) {
-		return lhs << "[" << rhs.counter << "/" << rhs.denominator << "]";
-	}
-
-	/// \brief
-	/// multiply a rational by an integer
-	/// \details
-	/// This operator* multiplies a rational value by an integer value.
-	rational operator*(const int rhs) const {
+   /// \brief
+   /// output operator for a rational value
+   /// \details
+   /// This operator<< prints a constructor in the format
+   /// [counter/denominator] where both values are printed as
+   /// decimal values.
+   friend std::ostream & operator<<( std::ostream & lhs, const rational & rhs ){
+      lhs 
+         << "[" 
+         << std::setfill('0') << std::setw(4) << std::showbase << std::hex << rhs.counter 
+         << "/" 
+         << std::setfill('0') << std::setw(4) << std::showbase << std::hex << rhs.denominator
+         << "]";
+	  return lhs;
+   }   
+   
+   /// \brief   
+   /// multiply a rational by an integer
+   /// \details
+   /// This operator* multiplies a rational value by an integer value.
+   rational operator*( const int rhs ) const {
 		return rational(counter * rhs, denominator);
-	}
-
-	/// \brief
-	/// multiply a rational by a rational
-	/// \details
-	/// This operator* multiplies a rational value by a rational value.
-	rational operator*(const rational& rhs) const {
-		return rational(counter * rhs.counter, denominator * rhs.denominator);
-	}
-
-	/// \brief
-	/// add a rational to another rational
-	/// \details
-	/// This operator+= adds a rational value a rational variable.
-	rational& operator+=(const rational& rhs) {
-		counter = counter * rhs.denominator + rhs.counter * denominator;
-		denominator *= rhs.denominator;
-		reduce();
-		return *this;
-	}
-
-	/// \brief
-	/// multiplies a rational by a rational
-	/// \detals
-	/// This operator *= multiplies a rational value by a rational value
-	rational operator*=(const rational& rhs) {
-		counter = counter * rhs.counter;
-		denominator *= rhs.denominator;
-		reduce();
-		return *this;
-	}
+   }
+   
+   /// \brief   
+   /// multiply a rational by a rational
+   /// \details
+   /// This operator* multiplies a rational value by a rational value.
+   rational operator*( const rational & rhs ) const {
+      return rational( 
+         counter * rhs.counter,
+		 denominator * rhs.denominator
+      );
+   }
+   
+   /// \brief   
+   /// add a rational to another rational
+   /// \details
+   /// This operator+= adds a rational value to a rational variable.
+   rational & operator+=( const rational & rhs ){
+      counter = counter * rhs.denominator + rhs.counter * denominator;
+      denominator *= rhs.denominator;
+      reduce();
+      return *this;
+   }
+   
+   /// \brief
+   /// multiply a rational to another rational
+   /// \details
+   /// This operator*= multiplies a rational value to a rational variable.
+   rational operator*=( const rational & rhs ){
+      counter *= rhs.counter;
+      denominator *= rhs.denominator;
+      reduce();
+      return rhs;
+   }
+   
+   
 };
-
 #endif
